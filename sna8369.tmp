@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://doo5rad2h63l5"]
+
+[ext_resource type="Script" path="res://scripts/move.gd" id="1_3r2l2"]
+[ext_resource type="Texture2D" uid="uid://b0hdbp4o2s8ke" path="res://assets/SnailSprite/SnailSprite_RightDown.png" id="1_yg73q"]
+[ext_resource type="Script" path="res://sprite.gd" id="3_gbyp5"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_oq4wk"]
+
+[node name="Snail" type="CharacterBody2D"]
+script = ExtResource("1_3r2l2")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_yg73q")
+offset = Vector2(0, -6.605)
+script = ExtResource("3_gbyp5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_oq4wk")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]

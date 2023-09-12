@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cdtdiasoteh21"]
+
+[ext_resource type="Script" path="res://scripts/astar_visualizer.gd" id="1_t8o5r"]
+
+[node name="Visualizer" type="Node2D"]
+z_index = 90
+y_sort_enabled = true
+script = ExtResource("1_t8o5r")

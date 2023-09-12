@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://bedhxgulbfinw"]
+
+[ext_resource type="Texture2D" uid="uid://bwmd8okkm1p33" path="res://assets/slimebar2-export.png" id="1_3m1k5"]
+[ext_resource type="Texture2D" uid="uid://dmf5ravjkrdtm" path="res://assets/slimebar-bar.png" id="2_puyk2"]
+[ext_resource type="Script" path="res://scripts/lifebar.gd" id="3_feea1"]
+
+[node name="TextureProgressBar" type="TextureProgressBar"]
+offset_left = 1558.0
+offset_top = 913.0
+offset_right = 2527.0
+offset_bottom = 1381.0
+scale = Vector2(0.57, 0.57)
+max_value = 14.0
+value = 14.0
+texture_under = ExtResource("1_3m1k5")
+texture_progress = ExtResource("2_puyk2")
+texture_progress_offset = Vector2(191.83, 269.955)
+script = ExtResource("3_feea1")
