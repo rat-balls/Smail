@@ -17,12 +17,16 @@ var WalkableTiles
 var astar
 var world
 var current_tile
+var pooplayer
+var slurplayer
 
 func _ready():
 	ti = get_parent()
 	WalkableTiles = ti.WalkableTiles
 	astar = ti.astar
 	world = ti.get_parent()
+	pooplayer = get_node("SnailPoop")
+	slurplayer = get_node("SnailSlurp")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -34,6 +38,7 @@ func _process(_delta):
 		handlePath()
 		
 		if (Input.is_action_just_pressed("Restart")):
+			world.winMsg.visible = true
 			dead = false
 			slimebar = 14
 			world.loadLv()
@@ -164,7 +169,8 @@ func Slime():
 	if (!current_tile.Used && !current_tile.Water):
 		
 		if (current_tile.Slimed):
-
+			slurplayer.set_pitch_scale(randf_range(0.5, 1.5))
+			slurplayer.play()
 			current_tile.Used = true
 			current_tile.Slimed = false
 			
@@ -172,6 +178,8 @@ func Slime():
 		
 		if (!current_tile.Slimed):
 			slimebar -= 1
+			pooplayer.set_pitch_scale(randf_range(0.5, 1.5))
+			pooplayer.play()
 			current_tile.Used = true
 			if(slimebar > 0):
 				current_tile.Slimed = true
