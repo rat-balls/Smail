@@ -93,15 +93,15 @@ func Win():
 			if(ti_cord == Vector2i(7,3)):
 				ti.erase_cell(2, dec_tile)
 				ti.set_cell(2, dec_tile, 2, Vector2i(6,3), 0)
-	var lvBTN = world.levelBTNs.get_node("LevelButton" + str(world.lv_num))
-	lvBTN.disabled = false
-	lvBTN.setButton()
 	if(Input.is_action_just_pressed("E")):
 		if(world.lv_num < 4):
 			world.nextLv()
 			world.loadLv()
 		else:
 			world.backToMenu()
+	var lvBTN = world.levelBTNs.get_node("LevelButton" + str(world.lv_num))
+	lvBTN.disabled = false
+	lvBTN.setButton()
 
 func leverFlip():
 	var sr = ti.get_surrounding_cells(ti.local_to_map(position))
@@ -136,6 +136,7 @@ func leverFlip():
 		ti.connectPoints()
 
 func Water():
+	world.slurpwater.play()
 	slimebar = 14
 	current_tile.Water = false
 	current_tile.Used = true

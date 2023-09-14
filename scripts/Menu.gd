@@ -15,6 +15,7 @@ var pooplayer
 var slurplayer
 var deathplayer
 var bgplayer
+var slurpwater
 
 func _ready():
 	menuBG = get_node("GUI/MenuBG")
@@ -26,8 +27,10 @@ func _ready():
 	leaveBTN = get_node("GUI/LeaveButton")
 	pooplayer = get_node("SnailPoop")
 	slurplayer = get_node("SnailSlurp")
+	slurpwater = get_node("SnailWaterSlurp")
 	deathplayer = get_node("SnailDeath")
 	bgplayer = get_node("BGMusic")
+	levelBTNs.get_node("LevelButton1").setButton()
 
 func nextLv():
 	lv_num += 1

@@ -2,6 +2,7 @@ extends TextureButton
 
 var world
 var level_number
+var set
 
 func _ready():
 	var lv_buttons = get_parent()
@@ -10,9 +11,11 @@ func _ready():
 	level_number = z_index
 
 func setButton():
-	pressed.connect(self._button_pressed)
-	mouse_entered.connect(self._mouse_entered)
-	mouse_exited.connect(self._mouse_exited)
+	if(!set):
+		set = true
+		pressed.connect(self._button_pressed)
+		mouse_entered.connect(self._mouse_entered)
+		mouse_exited.connect(self._mouse_exited)
 
 func _button_pressed():
 	world.lv_num = level_number
