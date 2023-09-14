@@ -37,11 +37,11 @@ func _process(_delta):
 		handlePath()
 		
 		if (Input.is_action_just_pressed("Restart")):
-			world.winMsg.visible = false
 			dead = false
 			playedonce = false
 			slimebar = 14
 			world.loadLv()
+			world.winMsg.visible = false
 			
 		if(WalkableTiles.has(str(ti.local_to_map(position)))):
 			current_tile = WalkableTiles[str(ti.local_to_map(position))]
@@ -191,7 +191,7 @@ func Slime():
 func Death():
 	if(!world.deathplayer.is_playing() && !playedonce):
 		playedonce = true
-		world.deathplayer.set_pitch_scale(randf_range(1.2, 1.5))
+		world.deathplayer.set_pitch_scale(randf_range(1.4, 1.6))
 		world.deathplayer.play()
 	dead = true
 	path_to_selected = []

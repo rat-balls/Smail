@@ -14,6 +14,7 @@ var leaveBTN
 var pooplayer
 var slurplayer
 var deathplayer
+var bgplayer
 
 func _ready():
 	menuBG = get_node("GUI/MenuBG")
@@ -26,6 +27,7 @@ func _ready():
 	pooplayer = get_node("SnailPoop")
 	slurplayer = get_node("SnailSlurp")
 	deathplayer = get_node("SnailDeath")
+	bgplayer = get_node("BGMusic")
 
 func nextLv():
 	lv_num += 1
@@ -83,3 +85,7 @@ func _on_start_button_mouse_entered():
 func _on_start_button_mouse_exited():
 	slurplayer.set_pitch_scale(1)
 	slurplayer.play()
+
+
+func _on_bg_music_finished():
+	bgplayer.play()

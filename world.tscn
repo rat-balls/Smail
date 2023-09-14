@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://bwidwh5p2rssg"]
+[gd_scene load_steps=27 format=3 uid="uid://bwidwh5p2rssg"]
 
 [ext_resource type="Script" path="res://scripts/Menu.gd" id="1_1xvcl"]
 [ext_resource type="PackedScene" uid="uid://cdtdiasoteh21" path="res://visualizer.tscn" id="2_jno5e"]
@@ -25,6 +25,7 @@
 [ext_resource type="Texture2D" uid="uid://d13ivqtkioo4v" path="res://assets/win_message.png" id="24_rd5yr"]
 [ext_resource type="AudioStream" uid="uid://dbrmie3qjxe7c" path="res://assets/sfx/snail_slurp3.wav" id="24_rjxwn"]
 [ext_resource type="AudioStream" uid="uid://s4acj36xlrjq" path="res://assets/sfx/death2.wav" id="25_3f54d"]
+[ext_resource type="AudioStream" uid="uid://crkuelp23130h" path="res://assets/sfx/smailbg_mus.wav" id="26_qpixq"]
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_1xvcl")
@@ -294,8 +295,14 @@ stream = ExtResource("25_3f54d")
 volume_db = -28.168
 max_polyphony = 5
 
+[node name="BGMusic" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("26_qpixq")
+volume_db = -11.243
+autoplay = true
+
 [connection signal="mouse_entered" from="GUI/StartButton" to="." method="_on_start_button_mouse_entered"]
 [connection signal="mouse_exited" from="GUI/StartButton" to="." method="_on_start_button_mouse_exited"]
 [connection signal="pressed" from="GUI/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="GUI/QuitButton" to="." method="_on_quit_button_pressed"]
 [connection signal="pressed" from="GUI/LeaveButton" to="." method="_on_leave_button_pressed"]
+[connection signal="finished" from="BGMusic" to="." method="_on_bg_music_finished"]
