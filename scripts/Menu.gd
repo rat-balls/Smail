@@ -11,6 +11,9 @@ var levelBTNs
 var deathMsg
 var winMsg
 var leaveBTN
+var pooplayer
+var slurplayer
+var deathplayer
 
 func _ready():
 	menuBG = get_node("GUI/MenuBG")
@@ -20,6 +23,9 @@ func _ready():
 	deathMsg = get_node("GUI/DeathMessage")
 	winMsg = get_node("GUI/WinMessage")
 	leaveBTN = get_node("GUI/LeaveButton")
+	pooplayer = get_node("SnailPoop")
+	slurplayer = get_node("SnailSlurp")
+	deathplayer = get_node("SnailDeath")
 
 func nextLv():
 	lv_num += 1
@@ -68,3 +74,12 @@ func _on_quit_button_pressed():
 
 func _on_start_button_pressed():
 	loadLv()
+
+
+func _on_start_button_mouse_entered():
+	pooplayer.set_pitch_scale(1)
+	pooplayer.play()
+
+func _on_start_button_mouse_exited():
+	slurplayer.set_pitch_scale(1)
+	slurplayer.play()

@@ -4,6 +4,7 @@ var snail
 var normal_under
 var dried_under = preload("res://assets/dried_slimebar.png")
 
+
 func _process(_delta):
 	if(snail):
 		value = snail.slimebar

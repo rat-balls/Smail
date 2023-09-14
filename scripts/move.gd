@@ -17,16 +17,15 @@ var WalkableTiles
 var astar
 var world
 var current_tile
-var pooplayer
-var slurplayer
+var playedonce = false
+
 
 func _ready():
 	ti = get_parent()
 	WalkableTiles = ti.WalkableTiles
 	astar = ti.astar
 	world = ti.get_parent()
-	pooplayer = get_node("SnailPoop")
-	slurplayer = get_node("SnailSlurp")
+	
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -38,8 +37,9 @@ func _process(_delta):
 		handlePath()
 		
 		if (Input.is_action_just_pressed("Restart")):
-			world.winMsg.visible = true
+			world.winMsg.visible = false
 			dead = false
+			playedonce = false
 			slimebar = 14
 			world.loadLv()
 			
@@ -93,6 +93,9 @@ func Win():
 			if(ti_cord == Vector2i(7,3)):
 				ti.erase_cell(2, dec_tile)
 				ti.set_cell(2, dec_tile, 2, Vector2i(6,3), 0)
+	var lvBTN = world.levelBTNs.get_node("LevelButton" + str(world.lv_num))
+	lvBTN.disabled = false
+	lvBTN.setButton()
 	if(Input.is_action_just_pressed("E")):
 		if(world.lv_num < 4):
 			world.nextLv()
@@ -169,8 +172,8 @@ func Slime():
 	if (!current_tile.Used && !current_tile.Water):
 		
 		if (current_tile.Slimed):
-			slurplayer.set_pitch_scale(randf_range(0.5, 1.5))
-			slurplayer.play()
+			world.slurplayer.set_pitch_scale(randf_range(0.5, 1.5))
+			world.slurplayer.play()
 			current_tile.Used = true
 			current_tile.Slimed = false
 			
@@ -178,14 +181,18 @@ func Slime():
 		
 		if (!current_tile.Slimed):
 			slimebar -= 1
-			pooplayer.set_pitch_scale(randf_range(0.5, 1.5))
-			pooplayer.play()
 			current_tile.Used = true
 			if(slimebar > 0):
+				world.pooplayer.set_pitch_scale(randf_range(0.5, 1.5))
+				world.pooplayer.play()
 				current_tile.Slimed = true
 				
 
 func Death():
+	if(!world.deathplayer.is_playing() && !playedonce):
+		playedonce = true
+		world.deathplayer.set_pitch_scale(randf_range(1.2, 1.5))
+		world.deathplayer.play()
 	dead = true
 	path_to_selected = []
 	direction = null
