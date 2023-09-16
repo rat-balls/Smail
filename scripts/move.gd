@@ -24,8 +24,9 @@ func _ready():
 	ti = get_parent()
 	WalkableTiles = ti.WalkableTiles
 	astar = ti.astar
-	world = ti.get_parent()
-	
+	world = get_tree().root.get_child(0)
+	world.winMsg.visible = false
+	world.deathMsg.visible = false
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -35,17 +36,16 @@ func _process(_delta):
 		wipeSlime()
 		handleHoverAndSelect()
 		handlePath()
-		
-		if (Input.is_action_just_pressed("Restart")):
-			dead = false
-			playedonce = false
-			slimebar = 14
-			world.loadLv()
-			world.winMsg.visible = false
 			
 		if(WalkableTiles.has(str(ti.local_to_map(position)))):
 			current_tile = WalkableTiles[str(ti.local_to_map(position))]
 			handleCurrentTile()
+		
+		if (Input.is_action_just_pressed("Restart") || Input.is_action_just_pressed("rightClick")):
+			dead = false
+			playedonce = false
+			slimebar = 14
+			world.loadLv()
 
 func wipeSlime():
 	for t in ti.get_used_cells(3):
@@ -93,7 +93,7 @@ func Win():
 			if(ti_cord == Vector2i(7,3)):
 				ti.erase_cell(2, dec_tile)
 				ti.set_cell(2, dec_tile, 2, Vector2i(6,3), 0)
-	if(Input.is_action_just_pressed("E")):
+	if(Input.is_action_just_pressed("E") || Input.is_action_just_pressed("leftClick")):
 		if(world.lv_num < 4):
 			world.nextLv()
 			world.loadLv()

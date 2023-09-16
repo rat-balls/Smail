@@ -57,6 +57,7 @@ texture_region_size = Vector2i(100, 150)
 6:4/0 = 0
 7:4/0 = 0
 8:4/0 = 0
+9:4/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_36uqk"]
 tile_shape = 1
@@ -64,6 +65,8 @@ tile_size = Vector2i(100, 50)
 sources/2 = SubResource("TileSetAtlasSource_hgp8c")
 
 [node name="TileMap" type="TileMap"]
+z_index = 4096
+z_as_relative = false
 y_sort_enabled = true
 texture_filter = 1
 tile_set = SubResource("TileSet_36uqk")
@@ -84,19 +87,19 @@ layer_2/modulate = Color(1, 1, 1, 1)
 layer_2/y_sort_enabled = true
 layer_2/y_sort_origin = 2
 layer_2/z_index = -2
-layer_2/tile_data = PackedInt32Array(131074, 458754, 3)
+layer_2/tile_data = PackedInt32Array(1245192, 589826, 4, 1638412, 458754, 3)
 layer_3/name = "WalkableGround"
 layer_3/enabled = true
 layer_3/modulate = Color(1, 1, 1, 1)
 layer_3/y_sort_enabled = true
 layer_3/y_sort_origin = 1
 layer_3/z_index = -2
-layer_3/tile_data = PackedInt32Array(-196610, 131074, 2, -131074, 524290, 1, -65537, 524290, 1, -1, 524290, 1, 0, 524290, 1, 65536, 524290, 1, 131073, 524290, 1, 196609, 65538, 2)
+layer_3/tile_data = PackedInt32Array(1245192, 131074, 2, 1310729, 524290, 1, 1376265, 524290, 1, 1441802, 524290, 1, 1507338, 524290, 1, 1572875, 524290, 1, 1638411, 524290, 1, 1703948, 65538, 2)
 layer_4/name = "Background"
 layer_4/enabled = true
 layer_4/modulate = Color(1, 1, 1, 1)
 layer_4/y_sort_enabled = true
 layer_4/y_sort_origin = 1
 layer_4/z_index = -2
-layer_4/tile_data = PackedInt32Array(131074, 2, 0)
+layer_4/tile_data = PackedInt32Array(1638412, 2, 0)
 script = ExtResource("2_00fse")

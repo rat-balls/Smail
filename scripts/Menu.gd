@@ -2,71 +2,59 @@ extends Node
 
 var lv_num = 1
 var lv
-var SlimeBar = preload('res://slime_bar.tscn')
-var slime_bar
-var menuBG
-var startBTN
-var quitBTN
-var levelBTNs
-var deathMsg
-var winMsg
-var leaveBTN
-var pooplayer
-var slurplayer
-var deathplayer
-var bgplayer
-var slurpwater
+
+#bg
+@onready var menuBG = $BG/BGs/MenuBG
+
+#moving ui
+@onready var camera = $Camera2D
+@onready var moving_ui = $MovingUI
+@onready var moving_gui = $MovingUI/MovingGUI
+@onready var winMsg = $MovingUI/MovingGUI/WinMessage
+@onready var deathMsg = $MovingUI/MovingGUI/DeathMessage
+@onready var quitBTN = $MovingUI/MovingGUI/QuitButton
+@onready var slime_bar = $MovingUI/MovingGUI/SlimeBar
+
+#ui
+@onready var ui = $UI
+@onready var gui = $UI/GUI
+@onready var leaveBTN = $UI/GUI/LeaveButton
+@onready var levelBTNs = $UI/GUI/LevelButtons
+@onready var startBTN = $UI/GUI/StartButton
+
+#sfx players
+@onready var pooplayer = $SnailPoop
+@onready var slurplayer = $SnailSlurp
+@onready var slurpwater = $SnailWaterSlurp
+@onready var deathplayer = $SnailDeath
+@onready var bgplayer = $BGMusic
+
 
 func _ready():
-	menuBG = get_node("GUI/MenuBG")
-	startBTN = get_node("GUI/StartButton")
-	quitBTN = get_node("GUI/QuitButton")
-	levelBTNs = get_node("GUI/LevelButtons")
-	deathMsg = get_node("GUI/DeathMessage")
-	winMsg = get_node("GUI/WinMessage")
-	leaveBTN = get_node("GUI/LeaveButton")
-	pooplayer = get_node("SnailPoop")
-	slurplayer = get_node("SnailSlurp")
-	slurpwater = get_node("SnailWaterSlurp")
-	deathplayer = get_node("SnailDeath")
-	bgplayer = get_node("BGMusic")
 	levelBTNs.get_node("LevelButton1").setButton()
 
 func nextLv():
 	lv_num += 1
 
 func loadLv():
-	quitBTN.visible = true
 	menuBG.visible = false
-	startBTN.visible = false
-	levelBTNs.visible = false
-	deathMsg.visible = false
-	winMsg.visible = false
-	leaveBTN.visible = false
-	#load level
+	moving_ui.visible = true
+	ui.visible = false
 	remove_child(lv)
 	var Level = load('res://level0' + str(lv_num) + '.tscn')
 	lv = Level.instantiate()
 	add_child(lv)
-	#load visualizer
-	# get_node("Visualizer").visualize(lv.astar)
-	#load slime bar
-	get_node("GUI").remove_child(slime_bar)
-	slime_bar = SlimeBar.instantiate()
-	get_node("GUI").add_child(slime_bar)
 	slime_bar.getSnail(lv.character)
+	#get_node("Visualizer").visualize(lv.astar)
 
 func backToMenu():
+	camera.zoom = Vector2(1,1)
 	lv_num = 1
-	quitBTN.visible = false
 	menuBG.visible = true
-	startBTN.visible = true
-	levelBTNs.visible = true
-	deathMsg.visible = false
-	winMsg.visible = false
-	leaveBTN.visible = true
+	moving_ui.visible = false
+	ui.visible = true
 	remove_child(lv)
-	get_node("GUI").remove_child(slime_bar)
+	moving_gui.remove_child(slime_bar)
 
 
 func _on_leave_button_pressed():

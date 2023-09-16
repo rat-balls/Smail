@@ -57,6 +57,7 @@ texture_region_size = Vector2i(100, 150)
 6:4/0 = 0
 7:4/0 = 0
 8:4/0 = 0
+9:4/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_36uqk"]
 tile_shape = 1
@@ -64,6 +65,7 @@ tile_size = Vector2i(100, 50)
 sources/2 = SubResource("TileSetAtlasSource_j2s6q")
 
 [node name="TileMap" type="TileMap"]
+z_as_relative = false
 y_sort_enabled = true
 texture_filter = 1
 tile_set = SubResource("TileSet_36uqk")
@@ -84,19 +86,19 @@ layer_2/modulate = Color(1, 1, 1, 1)
 layer_2/y_sort_enabled = true
 layer_2/y_sort_origin = 2
 layer_2/z_index = -2
-layer_2/tile_data = PackedInt32Array(-393210, 458754, 3)
+layer_2/tile_data = PackedInt32Array(1114126, 458754, 3, 1245190, 589826, 4)
 layer_3/name = "WalkableGround"
 layer_3/enabled = true
 layer_3/modulate = Color(1, 1, 1, 1)
 layer_3/y_sort_enabled = true
 layer_3/y_sort_origin = 1
 layer_3/z_index = -2
-layer_3/tile_data = PackedInt32Array(-196610, 131074, 2, -131074, 524290, 1, -65537, 524290, 1, -1, 524290, 1, 0, 524290, 2, 131071, 589826, 1, 196607, 589826, 1, 262142, 262146, 0, 327679, 524290, 1, 393215, 524290, 1, 393216, 524290, 1, 458752, 65538, 0, 393217, 589826, 1, 262146, 589826, 1, -65536, 589826, 1, -131071, 589826, 1, -196607, 589826, 1, -262142, 589826, 1, -327678, 589826, 1, -393213, 131074, 0, -327677, 524290, 1, -262140, 524290, 1, -196604, 458754, 2, -131067, 196610, 0, -65532, 589826, 1, 4, 589826, 1, 65539, 589826, 1, 131075, 589826, 1, 196610, 589826, 1, -262139, 589826, 1, 327681, 458754, 0, -327675, 196610, 2)
+layer_3/tile_data = PackedInt32Array(1572872, 589826, 1, 1966089, 65538, 0, 1900552, 524290, 1, 1835016, 524290, 1, 1769479, 524290, 1, 1703943, 262146, 0, 1900553, 589826, 1, 1835018, 458754, 0, 1769482, 589826, 1, 1703947, 589826, 1, 1638411, 589826, 1, 1572876, 589826, 1, 1507340, 589826, 1, 1441805, 589826, 1, 1376269, 196610, 0, 1310733, 458754, 2, 1245197, 589826, 1, 1179662, 196610, 2, 1638407, 589826, 1, 1441801, 589826, 1, 1376265, 589826, 1, 1310730, 589826, 1, 1245194, 589826, 1, 1179659, 589826, 1, 1179660, 524290, 1, 1114123, 131074, 0, 1507336, 524290, 2, 1441800, 524290, 1, 1376263, 524290, 1, 1310727, 524290, 1, 1245190, 131074, 2, 1245196, 524290, 1)
 layer_4/name = "Background"
 layer_4/enabled = true
 layer_4/modulate = Color(1, 1, 1, 1)
 layer_4/y_sort_enabled = true
 layer_4/y_sort_origin = 1
 layer_4/z_index = -2
-layer_4/tile_data = PackedInt32Array(-393210, 2, 0)
+layer_4/tile_data = PackedInt32Array(1114126, 2, 0)
 script = ExtResource("2_kmqpu")

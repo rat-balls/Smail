@@ -5,10 +5,17 @@
 [ext_resource type="Script" path="res://scripts/lifebar.gd" id="3_feea1"]
 
 [node name="TextureProgressBar" type="TextureProgressBar"]
-offset_left = 1558.0
-offset_top = 913.0
-offset_right = 2527.0
-offset_bottom = 1381.0
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -576.0
+offset_top = -291.0
+offset_right = 393.0
+offset_bottom = 177.0
+grow_horizontal = 0
+grow_vertical = 0
 scale = Vector2(0.57, 0.57)
 max_value = 14.0
 value = 14.0

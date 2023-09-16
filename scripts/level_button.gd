@@ -5,9 +5,7 @@ var level_number
 var set
 
 func _ready():
-	var lv_buttons = get_parent()
-	var gui = lv_buttons.get_parent()
-	world = gui.get_parent()
+	world = get_tree().root.get_child(0)
 	level_number = z_index
 
 func setButton():

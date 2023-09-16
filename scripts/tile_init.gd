@@ -9,6 +9,7 @@ var win_cell
 var win_surr_cells = []
 var lever_cells = []
 var lever_surr_cells = []
+var spwnTile = Vector2i(100,100)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -19,7 +20,11 @@ func _ready():
 	add_child(snail)
 	character = get_node("Snail")
 	if(character):
-		character.position = astar.get_point_position(1)
+		for tile in get_used_cells(2):
+			var tl_cords = get_cell_atlas_coords(2, tile)
+			if(tl_cords == Vector2i(9,4)):
+				spwnTile = tile
+		character.position = astar.get_point_position(WalkableTiles[str(spwnTile)].ID)
 
 
 func setGrid():
@@ -34,7 +39,7 @@ func setGrid():
 	connectPoints()
 
 func setWalkableTiles(tile):
-	WalkableTiles[str(Vector2(tile.x, tile.y))] = {
+	WalkableTiles[str(tile)] = {
 		"ID": null,
 		"Hovered": false,
 		"Selected": false,
@@ -56,7 +61,7 @@ func setDecorationTileProperties(ti):
 	if(ti_cord == Vector2i(7,4)
 	|| ti_cord == Vector2i(8,4)):
 		lever_cells.push_back(ti)
-		lever_surr_cells = get_surrounding_cells(ti)
+		lever_surr_cells += get_surrounding_cells(ti)
 
 func setBarriers(ti_cord, ti):
 	if(ti_cord == Vector2i(3,4)
