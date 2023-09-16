@@ -14,7 +14,7 @@ var spwnTile = Vector2i(100,100)
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	astar = AStar2D.new()
-	Snail = load('res://snail.tscn')
+	Snail = load('res://scenes/snail.tscn')
 	setGrid()
 	var snail = Snail.instantiate()
 	add_child(snail)
@@ -49,7 +49,8 @@ func setWalkableTiles(tile):
 		"WinTile": false,
 		"OnBarrier": false,
 		"OffBarrier": false,
-		"LeverTile": false
+		"LeverTile": false,
+		"Oil": false
 	}
 
 func setDecorationTileProperties(ti):
@@ -80,6 +81,11 @@ func setWalkableTileProperties(tile):
 	|| cord == Vector2i(8,0) 
 	|| cord == Vector2i(9,0)):
 		WalkableTiles[str(tile)].Water = true
+	if(cord == Vector2i(1,1) 
+	|| cord ==  Vector2i(2,1) 
+	|| cord == Vector2i(3,1) 
+	|| cord == Vector2i(4,1)):
+		WalkableTiles[str(tile)].Oil = true
 	if(win_surr_cells):
 		if(win_surr_cells.has(tile)):
 			WalkableTiles[str(tile)].WinTile = true

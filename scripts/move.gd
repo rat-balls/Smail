@@ -12,6 +12,7 @@ var speed = 200
 var dead = false
 var win = false
 var slimebar = 15
+var oiled
 
 var WalkableTiles
 var astar
@@ -29,7 +30,6 @@ func _ready():
 	world.deathMsg.visible = false
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	if(ti):
 		tile = ti.local_to_map(get_global_mouse_position())
@@ -41,11 +41,15 @@ func _process(_delta):
 			current_tile = WalkableTiles[str(ti.local_to_map(position))]
 			handleCurrentTile()
 		
+		if(Input.is_action_just_pressed("N")):
+			print(WalkableTiles[str(tile)])
+		
 		if (Input.is_action_just_pressed("Restart") || Input.is_action_just_pressed("rightClick")):
 			dead = false
 			playedonce = false
 			slimebar = 14
 			world.loadLv()
+
 
 func wipeSlime():
 	for t in ti.get_used_cells(3):
@@ -59,6 +63,7 @@ func wipeSlime():
 			if (WalkableTiles[str(t)].Used && t != ti.local_to_map(position)):
 				WalkableTiles[str(t)].Used = false
 
+
 func handlePath():
 	if(!dead && !win):
 		if (SelectedTiles.size() >= 1):
@@ -67,6 +72,7 @@ func handlePath():
 				astar.get_closest_point(SelectedTile)
 			)
 
+
 func handleCurrentTile():
 	
 	if(current_tile.LeverTile && !current_tile.Used):
@@ -74,6 +80,8 @@ func handleCurrentTile():
 	
 	if(current_tile.Water):
 		Water()
+	elif(current_tile.Oil):
+		Oil()
 	else:
 		Slime()
 		if(slimebar <= 0):
@@ -86,6 +94,7 @@ func handleCurrentTile():
 func Win():
 	win = true
 	world.winMsg.visible = true
+	
 	var sr = ti.get_surrounding_cells(ti.local_to_map(position))
 	for dec_tile in ti.get_used_cells(2):
 		var ti_cord = ti.get_cell_atlas_coords(2, dec_tile)
@@ -93,15 +102,15 @@ func Win():
 			if(ti_cord == Vector2i(7,3)):
 				ti.erase_cell(2, dec_tile)
 				ti.set_cell(2, dec_tile, 2, Vector2i(6,3), 0)
+	
 	if(Input.is_action_just_pressed("E") || Input.is_action_just_pressed("leftClick")):
-		if(world.lv_num < 4):
-			world.nextLv()
-			world.loadLv()
-		else:
-			world.backToMenu()
+		world.lv_num += 1
+		world.loadLv()
+		
 	var lvBTN = world.levelBTNs.get_node("LevelButton" + str(world.lv_num))
 	lvBTN.disabled = false
 	lvBTN.setButton()
+
 
 func leverFlip():
 	var sr = ti.get_surrounding_cells(ti.local_to_map(position))
@@ -126,14 +135,16 @@ func leverFlip():
 		elif(ti_cord == Vector2i(6,4)):
 			ti.erase_cell(2, dec_tile)
 			ti.set_cell(2, dec_tile, 2, Vector2i(5,4), 0)
-
+		
+		ti_cord = ti.get_cell_atlas_coords(2, dec_tile)
 		ti.setBarriers(ti_cord, dec_tile)
 		if(WalkableTiles.has(str(dec_tile))):
 			if(WalkableTiles[str(dec_tile)].OffBarrier):
-				astar.set_point_disabled(WalkableTiles[str(dec_tile)].ID, true)
-			elif(WalkableTiles[str(dec_tile)].OnBarrier):
 				astar.set_point_disabled(WalkableTiles[str(dec_tile)].ID, false)
+			elif(WalkableTiles[str(dec_tile)].OnBarrier):
+				astar.set_point_disabled(WalkableTiles[str(dec_tile)].ID, true)
 		ti.connectPoints()
+
 
 func Water():
 	world.slurpwater.play()
@@ -142,6 +153,15 @@ func Water():
 	current_tile.Used = true
 	ti.erase_cell(3, ti.local_to_map(position))
 	ti.set_cell(3, ti.local_to_map(position), 2, Vector2i(0,0), 0)
+
+func Oil():
+	world.slurpwater.play()
+	current_tile.Oil = false
+	current_tile.Used = true
+	ti.erase_cell(3, ti.local_to_map(position))
+	ti.set_cell(3, ti.local_to_map(position), 2, Vector2i(0,0), 0)
+	oiled = true
+
 
 func handleHoverAndSelect():
 	for t in ti.get_used_cells(0):
@@ -168,6 +188,7 @@ func handleHoverAndSelect():
 			WalkableTiles[str(SelectedTiles.back())].Selected = false
 			SelectedTiles.pop_back()
 
+
 func Slime():
 	
 	if (!current_tile.Used && !current_tile.Water):
@@ -177,7 +198,7 @@ func Slime():
 			world.slurplayer.play()
 			current_tile.Used = true
 			current_tile.Slimed = false
-			
+		
 	if (!current_tile.Used):
 		
 		if (!current_tile.Slimed):
@@ -188,6 +209,7 @@ func Slime():
 				world.pooplayer.play()
 				current_tile.Slimed = true
 				
+
 
 func Death():
 	if(!world.deathplayer.is_playing() && !playedonce):
@@ -206,16 +228,27 @@ func Death():
 
 func _physics_process(delta):
 	
-	if (path_to_selected.size() > 1):
+	if (path_to_selected.size() > 1 && !oiled):
 		next_location = path_to_selected[1]
 		direction = global_position.direction_to(next_location)
-	elif (path_to_selected.size() == 1):
+	elif (path_to_selected.size() == 1 && !oiled):
 		next_location = path_to_selected[0]
 		direction = global_position.direction_to(next_location)
 	if(direction):
 		global_position += direction * delta * speed
+		var next_pos = global_position + direction * delta * (speed * 3)
+		if(!WalkableTiles.has(str(ti.local_to_map(next_pos))) || WalkableTiles[str(ti.local_to_map(next_pos))].OnBarrier):
+				oiled = false
+				if(SelectedTile != null):
+					path_to_selected = []
+					SelectedTile = null
+					direction = null
+					WalkableTiles[str(SelectedTiles.back())].Selected = false
+					SelectedTiles.pop_back()
+	if(!path_to_selected.size() > 0 && !oiled):
+			direction = null
 	
-	if(SelectedTile != null):
+	if(SelectedTile != null && !oiled):
 		if(ti.inRange(ti.map_to_local(position), ti.map_to_local(SelectedTile), 200, 50)):
 			path_to_selected = []
 			SelectedTile = null

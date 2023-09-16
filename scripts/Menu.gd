@@ -32,20 +32,29 @@ var lv
 
 func _ready():
 	levelBTNs.get_node("LevelButton1").setButton()
-
-func nextLv():
-	lv_num += 1
+	
+func _process(_delta):
+	if(Input.is_action_just_pressed("N") && menuBG.visible):
+		var levelz = [1,2,3,4,5]
+		for i in levelz:
+			var lvBTN = levelBTNs.get_node("LevelButton" + str(i))
+			lvBTN.disabled = false
+			lvBTN.setButton()
 
 func loadLv():
 	menuBG.visible = false
 	moving_ui.visible = true
 	ui.visible = false
-	remove_child(lv)
-	var Level = load('res://level0' + str(lv_num) + '.tscn')
-	lv = Level.instantiate()
-	add_child(lv)
-	slime_bar.getSnail(lv.character)
-	#get_node("Visualizer").visualize(lv.astar)
+	if(lv):
+		remove_child(lv)
+	var Level = load('res://scenes/levels/level0' + str(lv_num) + '.tscn')
+	if(Level):
+		lv = Level.instantiate()
+		add_child(lv)
+		slime_bar.getSnail(lv.character)
+		#get_node("Visualizer").visualize(lv.astar)
+	else:
+		backToMenu()
 
 func backToMenu():
 	camera.zoom = Vector2(1,1)
