@@ -144,6 +144,9 @@ func leverFlip():
 			elif(WalkableTiles[str(dec_tile)].OnBarrier):
 				astar.set_point_disabled(WalkableTiles[str(dec_tile)].ID, true)
 		ti.connectPoints()
+		
+		world.gateplayer.set_pitch_scale(randf_range(0.9, 1.1))
+		world.gateplayer.play()
 
 
 func Water():
@@ -156,6 +159,8 @@ func Water():
 
 func Oil():
 	world.slurpwater.play()
+	world.oilplayer.set_pitch_scale(randf_range(0.8, 1.2))
+	world.oilplayer.play()
 	current_tile.Oil = false
 	current_tile.Used = true
 	ti.erase_cell(3, ti.local_to_map(position))

@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://bwidwh5p2rssg"]
+[gd_scene load_steps=31 format=3 uid="uid://bwidwh5p2rssg"]
 
 [ext_resource type="Script" path="res://scripts/Menu.gd" id="1_1xvcl"]
 [ext_resource type="PackedScene" uid="uid://cdtdiasoteh21" path="res://scenes/visualizer.tscn" id="2_jno5e"]
@@ -28,6 +28,8 @@
 [ext_resource type="Texture2D" uid="uid://d13ivqtkioo4v" path="res://assets/win_message.png" id="24_rd5yr"]
 [ext_resource type="AudioStream" uid="uid://s4acj36xlrjq" path="res://assets/sfx/death2.wav" id="25_3f54d"]
 [ext_resource type="AudioStream" uid="uid://b5xfnqr3rto7m" path="res://assets/sfx/smailbg_mus-002.wav" id="28_qoivs"]
+[ext_resource type="AudioStream" uid="uid://f3qotpm5yulh" path="res://assets/sfx/gate_sound2.wav" id="29_qkwhn"]
+[ext_resource type="AudioStream" uid="uid://kk6dtg1j3ngn" path="res://assets/sfx/oil_sound2.wav" id="30_33jc7"]
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_1xvcl")
@@ -372,6 +374,16 @@ max_polyphony = 5
 stream = ExtResource("28_qoivs")
 volume_db = -5.0
 autoplay = true
+
+[node name="Gate" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("29_qkwhn")
+volume_db = 8.472
+max_polyphony = 10
+
+[node name="Oil" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("30_33jc7")
+volume_db = 8.472
+max_polyphony = 10
 
 [connection signal="pressed" from="MovingUI/MovingGUI/QuitButton" to="." method="_on_quit_button_pressed"]
 [connection signal="mouse_entered" from="UI/GUI/StartButton" to="." method="_on_start_button_mouse_entered"]

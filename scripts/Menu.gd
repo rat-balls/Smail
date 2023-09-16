@@ -28,10 +28,13 @@ var lv
 @onready var slurpwater = $SnailWaterSlurp
 @onready var deathplayer = $SnailDeath
 @onready var bgplayer = $BGMusic
+@onready var gateplayer = $Gate
+@onready var oilplayer = $Oil
 
 
 func _ready():
 	levelBTNs.get_node("LevelButton1").setButton()
+	
 	
 func _process(_delta):
 	if(Input.is_action_just_pressed("N") && menuBG.visible):
