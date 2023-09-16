@@ -27,7 +27,7 @@
 [ext_resource type="AudioStream" uid="uid://cwjqxdg340b3i" path="res://assets/sfx/snail_slurp4.wav" id="24_dk385"]
 [ext_resource type="Texture2D" uid="uid://d13ivqtkioo4v" path="res://assets/win_message.png" id="24_rd5yr"]
 [ext_resource type="AudioStream" uid="uid://s4acj36xlrjq" path="res://assets/sfx/death2.wav" id="25_3f54d"]
-[ext_resource type="AudioStream" uid="uid://crkuelp23130h" path="res://assets/sfx/smailbg_mus.wav" id="26_qpixq"]
+[ext_resource type="AudioStream" uid="uid://b5xfnqr3rto7m" path="res://assets/sfx/smailbg_mus-002.wav" id="28_qoivs"]
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_1xvcl")
@@ -360,7 +360,7 @@ max_polyphony = 5
 
 [node name="SnailWaterSlurp" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("24_dk385")
-volume_db = -17.0
+volume_db = -22.0
 max_polyphony = 5
 
 [node name="SnailDeath" type="AudioStreamPlayer2D" parent="."]
@@ -369,7 +369,8 @@ volume_db = -20.0
 max_polyphony = 5
 
 [node name="BGMusic" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("26_qpixq")
+stream = ExtResource("28_qoivs")
+volume_db = -5.0
 autoplay = true
 
 [connection signal="pressed" from="MovingUI/MovingGUI/QuitButton" to="." method="_on_quit_button_pressed"]
