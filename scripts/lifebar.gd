@@ -1,7 +1,7 @@
 extends TextureProgressBar
 
 var snail
-var normal_under
+var normal_under = preload("res://assets/slimebar2-export.png")
 var dried_under = preload("res://assets/dried_slimebar.png")
 
 
@@ -13,4 +13,5 @@ func _process(_delta):
 
 func getSnail(Snail):
 	snail = Snail
+	set_under_texture(normal_under)
 
