@@ -73,7 +73,7 @@ grow_vertical = 2
 texture = ExtResource("4_ixv4a")
 
 [node name="MovingUI" type="CanvasLayer" parent="."]
-layer = 2
+layer = 3
 visible = false
 
 [node name="MovingGUI" type="Control" parent="MovingUI"]
@@ -122,6 +122,8 @@ grow_horizontal = 2
 texture = ExtResource("24_rd5yr")
 
 [node name="SlimeBar" parent="MovingUI/MovingGUI" instance=ExtResource("8_lxro1")]
+z_index = 8
+y_sort_enabled = true
 layout_mode = 1
 offset_left = -588.0
 offset_top = -297.0

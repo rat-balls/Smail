@@ -31,23 +31,30 @@ var lv
 @onready var gateplayer = $Gate
 @onready var oilplayer = $Oil
 
-
 func _ready():
 	levelBTNs.get_node("LevelButton1").setButton()
 	
 	
 func _process(_delta):
 	if(Input.is_action_just_pressed("N") && menuBG.visible):
-		var levelz = [1,2,3,4,5]
-		for i in levelz:
-			var lvBTN = levelBTNs.get_node("LevelButton" + str(i))
-			lvBTN.disabled = false
-			lvBTN.setButton()
+		var n = 1
+		unlockLevel(n)
+
+func unlockLevel(n):
+	var lvBTN = levelBTNs.get_node("LevelButton" + str(n))
+	lvBTN.disabled = false
+	lvBTN.setButton()
+	
+	var nxtLv = load('res://scenes/levels/level0' + str(n+1) + '.tscn')
+	if(nxtLv):
+		n += 1
+		unlockLevel(n)
 
 func loadLv():
 	menuBG.visible = false
-	moving_ui.visible = true
 	ui.visible = false
+	moving_ui.visible = true
+
 	if(lv):
 		remove_child(lv)
 	var Level = load('res://scenes/levels/level0' + str(lv_num) + '.tscn')
@@ -66,7 +73,6 @@ func backToMenu():
 	moving_ui.visible = false
 	ui.visible = true
 	remove_child(lv)
-	moving_gui.remove_child(slime_bar)
 
 
 func _on_leave_button_pressed():

@@ -19,6 +19,7 @@ var astar
 var world
 var current_tile
 var playedonce = false
+var aligned = false
 
 
 func _ready():
@@ -71,6 +72,10 @@ func handlePath():
 				astar.get_closest_point(position), 
 				astar.get_closest_point(SelectedTile)
 			)
+			if(!aligned):
+				path_to_selected.insert(0, astar.get_point_position(astar.get_closest_point(position)))
+				if(ti.inRange(ti.map_to_local(position), ti.map_to_local(astar.get_point_position(astar.get_closest_point(position))), 200, 50)):
+					aligned = true
 
 
 func handleCurrentTile():
@@ -245,6 +250,7 @@ func _physics_process(delta):
 		if(!WalkableTiles.has(str(ti.local_to_map(next_pos))) || WalkableTiles[str(ti.local_to_map(next_pos))].OnBarrier):
 				oiled = false
 				if(SelectedTile != null):
+					aligned = false
 					path_to_selected = []
 					SelectedTile = null
 					direction = null
@@ -255,6 +261,7 @@ func _physics_process(delta):
 	
 	if(SelectedTile != null && !oiled):
 		if(ti.inRange(ti.map_to_local(position), ti.map_to_local(SelectedTile), 200, 50)):
+			aligned = false
 			path_to_selected = []
 			SelectedTile = null
 			direction = null
