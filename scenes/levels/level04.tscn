@@ -1,10 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://bwuafolw62n4v"]
+[gd_scene load_steps=5 format=3 uid="uid://f3iunck4fcvg"]
 
-[ext_resource type="Texture2D" uid="uid://6pgsfr0ict2w" path="res://assets/SnailMap-AtlasBig.png" id="1_bb8y1"]
-[ext_resource type="Script" path="res://scripts/tile_init.gd" id="2_aat7u"]
+[ext_resource type="Texture2D" uid="uid://6pgsfr0ict2w" path="res://assets/SnailMap-AtlasBig.png" id="1_yqdii"]
+[ext_resource type="Script" path="res://scripts/tile_init.gd" id="2_8iyas"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ys3tj"]
-texture = ExtResource("1_bb8y1")
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6twjt"]
+texture = ExtResource("1_yqdii")
 margins = Vector2i(2, 2)
 separation = Vector2i(2, 2)
 texture_region_size = Vector2i(100, 150)
@@ -62,7 +62,7 @@ texture_region_size = Vector2i(100, 150)
 [sub_resource type="TileSet" id="TileSet_36uqk"]
 tile_shape = 1
 tile_size = Vector2i(100, 50)
-sources/2 = SubResource("TileSetAtlasSource_ys3tj")
+sources/2 = SubResource("TileSetAtlasSource_6twjt")
 
 [node name="TileMap" type="TileMap"]
 z_as_relative = false
@@ -86,19 +86,19 @@ layer_2/modulate = Color(1, 1, 1, 1)
 layer_2/y_sort_enabled = true
 layer_2/y_sort_origin = 2
 layer_2/z_index = -2
-layer_2/tile_data = PackedInt32Array(1703941, 524290, 4, 1703942, 196610, 4, 1048584, 589826, 4, 1441800, 262146, 4, 1507338, 196610, 4, 1835022, 458754, 3, 1048587, 524290, 4)
-layer_3/name = "Ground"
+layer_2/tile_data = PackedInt32Array(1703942, 458754, 3, 1507335, 327682, 4, 1441804, 393218, 4, 1245197, 524290, 4, 1114119, 589826, 4)
+layer_3/name = "WalkableGround"
 layer_3/enabled = true
 layer_3/modulate = Color(1, 1, 1, 1)
 layer_3/y_sort_enabled = true
 layer_3/y_sort_origin = 1
 layer_3/z_index = -2
-layer_3/tile_data = PackedInt32Array(1507334, 589826, 1, 1376263, 131074, 0, 1703943, 589826, 1, 1441800, 524290, 1, 1441801, 589826, 1, 1179658, 589826, 1, 1376266, 589826, 1, 1441802, 458754, 2, 1572876, 589826, 1, 1114125, 524290, 1, 1572877, 524290, 1, 1900557, 196610, 2, 1441797, 589826, 0, 1507333, 524290, 1, 1638405, 262146, 0, 1376262, 589826, 0, 1572870, 524290, 2, 1703942, 524290, 1, 1769478, 65538, 0, 1441799, 524290, 2, 1638407, 589826, 1, 1048584, 131074, 2, 1114120, 524290, 1, 1507336, 524290, 2, 1572872, 589826, 1, 1179657, 524290, 1, 1245193, 524290, 2, 1310729, 262146, 0, 1376265, 327682, 2, 1507338, 524290, 1, 1245195, 589826, 1, 1310731, 589826, 1, 1572875, 524290, 1, 1638411, 65538, 0, 1114124, 589826, 1, 1179660, 589826, 1, 1507340, 131074, 0, 1769484, 589826, 1, 1835020, 262146, 0, 1900556, 524290, 1, 1048589, 131074, 0, 1638413, 196610, 0, 1703949, 589826, 1, 1966093, 65538, 0, 1179662, 524290, 1, 1245198, 524290, 0, 1114122, 196610, 2)
+layer_3/tile_data = PackedInt32Array(1441802, 524290, 1, 1179660, 524290, 1, 1572873, 524290, 1, 1441800, 393218, 2, 1507336, 524290, 1, 1310729, 2, 1, 1376265, 524290, 1, 1048587, 131074, 0, 1114123, 524290, 1, 1310733, 196610, 0, 1245196, 524290, 1, 1376268, 589826, 1, 1441804, 589826, 1, 1507339, 393218, 2, 1572875, 524290, 2, 1638410, 589826, 1, 1703946, 65538, 0, 1638409, 524290, 1, 1507338, 524290, 1, 1572876, 524290, 0, 1376264, 589826, 1, 1245193, 589826, 1, 1179658, 589826, 1, 1114122, 589826, 1, 1507335, 589826, 1, 1572871, 589826, 1, 1638406, 262146, 2, 1245192, 524290, 1, 1179656, 524290, 1, 1114119, 131074, 2)
 layer_4/name = "Background"
 layer_4/enabled = true
 layer_4/modulate = Color(1, 1, 1, 1)
 layer_4/y_sort_enabled = true
 layer_4/y_sort_origin = 1
 layer_4/z_index = -2
-layer_4/tile_data = PackedInt32Array(1703941, 2, 0, 1835022, 2, 0, 1048587, 2, 0)
-script = ExtResource("2_aat7u")
+layer_4/tile_data = PackedInt32Array(1703942, 2, 0, 1245197, 2, 0)
+script = ExtResource("2_8iyas")
